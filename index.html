@@ -384,7 +384,7 @@ button,a,select,summary,label{touch-action:manipulation}
 /* =================================================================
    CONSTANTS
    ================================================================= */
-const APP = { version: "3.1", released: "2026-11-16", schema: 1 };
+const APP = { version: "4", released: "2026-11-16", schema: 1 };
 const STORE_KEY = "oakey-ltm-state", UNDO_KEY = "oakey-ltm-undo";
 const SCALES = {
   CEFR: ["A1", "A2", "B1", "B2", "C1", "C2"],
@@ -1315,15 +1315,21 @@ function msRule(m) {
 function aSettings() { const o = q("#stateOut"); if (o) o.value = stateText(); }
 
 function vVersions() {
-  return `<div class="vh"><div><h1>Version history</h1><p>Newest first. Numbers follow major.minor.</p></div></div>
+  return `<div class="vh"><div><h1>Version history</h1><p>Newest first. One number per release.</p></div></div>
   <section class="pan"><div class="ph"><h2>How versions are numbered</h2></div><ul style="margin:0;padding-left:18px;color:var(--dim);display:grid;gap:4px">
-    <li><b style="color:var(--txt)">Major (1.x → 2.0):</b> a big upgrade: a new design, a new data pipeline, or a change to how data is stored. Your State still carries over.</li>
-    <li><b style="color:var(--txt)">Minor (2.0 → 2.1):</b> new features, views or fixes.</li>
+    <li><b style="color:var(--txt)">Whole numbers (V4, V5, …):</b> each release gets the next number, chosen whenever it feels worth one. Your State carries over between versions.</li>
+    <li>Through V3.1 the numbers had a decimal (major.minor). Those entries keep their old numbers.</li>
     <li>Versions before 1.0 were the spreadsheet years and the first prototype.</li></ul></section>
   <section class="pan"><div class="vers">${VERSIONS.map(v => `<article class="ver"><div><div class="tag">V${v.v}</div><div class="sub">${esc(v.date)}</div>${v.current ? `<span class="pill good" style="margin-top:6px">Current</span>` : ""}</div><div><h3>${esc(v.name)}</h3><p class="sub" style="margin:4px 0 0;max-width:76ch">${esc(v.summary)}</p>${v.groups.map(([g, it]) => `<div class="grp">${esc(g)}</div><ul>${it.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`).join("")}</div></article>`).join("")}</div></section>`;
 }
 const VERSIONS = [
-  { v: "3.1", date: "Nov 16, 2026", name: "Dialog and tab bar fixes", current: true,
+  { v: "4", date: "Nov 16, 2026", name: "Whole-number versions", current: true,
+    summary: "Versions are now plain whole numbers (V4, V5, and so on), bumped whenever a release feels worth a new number.",
+    groups: [["Changed", [
+      "The decimal system (2.0, 2.1, 3.0, 3.1) is retired. Earlier entries below keep their old numbers.",
+      "Everything from 3.0 and 3.1 carries over: iPhone app, device sync, and the dialog and tab bar fixes."
+    ]]] },
+  { v: "3.1", date: "Nov 16, 2026", name: "Dialog and tab bar fixes",
     summary: "Fixes for the iPhone version.",
     groups: [["Fixed", [
       "Dialogs (such as Edit language) no longer open the keyboard on phones, which had covered the buttons; the close button and Save/Cancel now stay on screen while you scroll, and the dialog follows the keyboard if you do open it.",
