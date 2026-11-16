@@ -1,6 +1,6 @@
 /* LTM service worker: keeps the app working offline.
    Bump CACHE with each release (it matches the version in index.html) so phones pick up the new files. */
-const CACHE = "ltm-v3.0";
+const CACHE = "ltm-v3.1";
 const SHELL = [
   "./", "index.html", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png", "icons/favicon-32.png",
